@@ -2,42 +2,45 @@ let products = JSON.parse(localStorage.getItem("products"))
   ? JSON.parse(localStorage.getItem("products"))
   : [
       {
-        title: "bananas",
-        category: "Fruit",
+        title: "The Alchemist",
+        category: "Fiction",
         price: 9.99,
-        img: "https://i.postimg.cc/FHrjH935/banana.jpg",
+        img: "https://bestlifeonline.com/wp-content/uploads/sites/3/2020/10/The-Alchemist-book-cover.jpg",
       },
       {
-        title: "apples",
-        category: "Fruit",
+        title: "Learning To Silence The Mind",
+        category: "Motivational",
         price: 9.99,
-        img: "https://i.postimg.cc/W4Kr8gKT/apple.jpg",
+        img: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1385071906l/18879598.jpg",
       },
       {
-        title: "peaches",
-        category: "Fruit",
+        title: "Their Eyes Were Watching God",
+        category: "Drama Fiction",
         price: 9.99,
-        img: "https://i.postimg.cc/Vv9CzTNk/peach.jpg",
+        img: "https://media.takealot.com/covers_tsins/69659/cc266a6c6576a8616bde1aa92973716e-pdpxl.jpg",
       },
       {
-        title: "grapes",
-        category: "Fruit",
+        title: "Rule Of Four",
+        category: "Fiction",
         price: 9.99,
-        img: "https://i.postimg.cc/SKw2Cq2K/grapes.jpg",
+        img: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1347646186l/18434.jpg",
       },
       {
-        title: "kiwi",
-        category: "Fruit",
+        title: "Adultery",
+        category: "Drama",
         price: 9.99,
-        img: "https://i.postimg.cc/43TbRzPP/Kiwi-Fruit.jpg",
+        img: "https://www.chicagotribune.com/resizer/KAqHVU2mouV8QtyRdue-HSIAnA8=/1200x0/top/arc-anglerfish-arc2-prod-tronc.s3.amazonaws.com/public/I3EOJY56YJHMTHMSIV4EU3OP2Q.jpg",
       },
       {
-        title: "oranges",
-        category: "Fruit",
+        title: "Othello",
+        category: "Drama Fiction",
         price: 9.99,
-        img: "https://i.postimg.cc/5NKQm8Dy/Oranges.jpg",
+        img: "https://images-na.ssl-images-amazon.com/images/I/71vx+-X-GQL.jpg",
       },
     ];
+
+    let cart = JSON.parse(localStorage.getItem("cart"))
+  ? JSON.parse(localStorage.getItem("cart")) : [];
 
 // READ
 function readProducts(products) {
@@ -49,6 +52,9 @@ function readProducts(products) {
         <div class="card-body">
           <h5 class="card-title">${product.title}</h5>
           <p class="card-text">R${product.price}</p>
+          <button type="button" class="btn btn-secondary" onclick="AddtoCart(${position})" >
+            Add To Cart
+  iction </button>
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProduct${position}" >
             Edit
           </button>
@@ -95,9 +101,9 @@ function readProducts(products) {
                           name="editCategory${position}"
                           id="editCategory${position}"
                         >
-                          <option value="Fruit">Fruit</option>
-                          <option value="Vegetables">Vegetables</option>
-                          <option value="Meat">Meat</option>
+                          <option value="Fiction">Fiction</option>
+                          <option value="Drama">Drama</option>
+                          <option value="Drama Fiction">Drama Fiction</option>
                         </select>
                       </div>
                       <div class="mb-3">
@@ -205,3 +211,12 @@ function deleteProduct(position) {
     readProducts(products);
   }
 }
+
+// Add to cart
+  function AddtoCart(position){
+   
+    cart.push({...products[position]})
+    localStorage.setItem("cart", JSON.stringify(cart));
+    
+  }
+
